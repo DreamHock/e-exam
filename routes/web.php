@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,17 +27,21 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard-student', function () {
-    return Inertia::render('Student/StudentDashboard');
-})
-    ->name('student.dashboard')
-    ->middleware(['auth', 'student']);
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard-student', function () {
+        return Inertia::render('Student/StudentDashboard');
+    })
+        ->name('student.dashboard')
+        ->middleware('student');
 
-Route::get('/dashboard-teacher', function () {
-    return Inertia::render('Teacher/TeacherDashboard');
-})
-    ->name('teacher.dashboard')
-    ->middleware(['auth', 'teacher']);
+    Route::get('/dashboard-teacher', function () {
+        return Inertia::render('Teacher/TeacherDashboard');
+    })
+        ->name('teacher.dashboard')
+        ->middleware('teacher');
+
+    Route::resource('/exams', ExamController::class);
+});
 
 
 // Route::middleware('auth')->group(function () {
