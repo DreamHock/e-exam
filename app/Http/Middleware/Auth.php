@@ -19,5 +19,7 @@ class Auth
         if (FacadesAuth::check()) {
             return $next($request);
         }
+
+        return redirect('/');
     }
 }

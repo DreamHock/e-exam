@@ -5,7 +5,12 @@ const AuthLayoutTeacher = ({ children }) => {
     return (
         <div className=" min-h-screen bg-slate-100 flex">
             <aside className="flex flex-col items-center p-4 min-h-screen bg-white w-52">
-                <div className="mb-4">Teacher</div>
+                <Link href={route("teacher.dashboard")} className="mb-4">
+                    Teacher
+                </Link>
+                <Link href={route("teacher.dashboard")} className="mb-2">
+                    Dashboard
+                </Link>
                 <Link href={route("exams.create")}>Create Exam</Link>
             </aside>
             <div className=" p-4 w-full">

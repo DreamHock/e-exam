@@ -4,7 +4,7 @@ import React from "react";
 
 const TeacherDashboard = () => {
     const { user } = usePage().props.auth;
-    return <AuthLayoutTeacher>welcome {user.name}</AuthLayoutTeacher>;
+    return <AuthLayoutTeacher>Dashboard</AuthLayoutTeacher>;
 };
 
 export default TeacherDashboard;
