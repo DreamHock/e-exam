@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'name' => 'teacher',
             'email' => 'teacher@example.com',
-            'type' => 'teacher'
+            'role' => 'teacher'
         ]);
         \App\Models\User::factory()->create([
             'name' => 'student',
             'email' => 'student@example.com',
-            'type' => 'student'
+            'role' => 'student'
         ]);
     }
 }

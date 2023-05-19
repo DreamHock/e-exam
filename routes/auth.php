@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthStudentSessionController;
-use App\Http\Controllers\Auth\AuthTeacherSessionController;
-use App\Http\Controllers\Auth\Logout;
-use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\Teacher\AuthStudentSessionController;
+use App\Http\Controllers\Teacher\AuthTeacherSessionController;
+use App\Http\Controllers\Teacher\VerifyEmailController;
+use App\Http\Controllers\Teacher\UserController;
+use App\Http\Controllers\Teacher\Logout;
 // use App\Http\Controllers\Auth\ConfirmablePasswordController;
 // use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 // use App\Http\Controllers\Auth\EmailVerificationPromptController;
