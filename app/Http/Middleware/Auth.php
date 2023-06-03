@@ -19,5 +19,6 @@ class Auth
         if (FacadesAuth::check()) {
             return $next($request);
         }
+        return abort(403);
     }
 }
