@@ -5,16 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Exam extends Model
+class Answer extends Model
 {
     protected $fillable = [
-        "name",
-        "date",
-        "start",
-        "end",
-        "user_id",
-        "startTime",
-        "endTime"
+        'question_id',
+        'answer',
+        'correct'
     ];
     use HasFactory;
 }

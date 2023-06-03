@@ -20,7 +20,7 @@ class UserController extends Controller
     public function create(Request $request): Response
     {
         
-        if ($request->type === 'student') {
+        if ($request->role === 'student') {
             return Inertia::render('Auth/LoginStudent');
         }
         return Inertia::render('Auth/LoginTeacher');
@@ -37,9 +37,9 @@ class UserController extends Controller
             // return dd('hello');
             // Check if the user is a teacher or a student
             $user = Auth::user();
-            if ($user->type == 'teacher') {
+            if ($user->role == 'teacher') {
                 return redirect()->intended('/dashboard-teacher');
-            } else if ($user->type == 'student') {
+            } else if ($user->role == 'student') {
                 return redirect()->intended('/dashboard-student');
             } else {
                 Auth::logout();

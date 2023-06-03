@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
-class ExamController extends Controller
+class ExamController  extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +23,7 @@ class ExamController extends Controller
      */
     public function create()
     {
-        return 'hello';
+        return Inertia::render('Teacher/CreateExam');
     }
 
     /**
@@ -28,13 +31,28 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $createdExam = Exam::create([
+            "name" => $request->name,
+            "date" => $request->date,
+            "start" => $request->startTime["hour"] . ":" . $request->startTime["minute"] . ":00",
+            "startTime" => $request->startTime["time"],
+            "end" => $request->endTime["hour"] . ":" . $request->endTime["minute"] . ":00",
+            "endTime" => $request->endTime["time"],
+            "user_id" => Auth::id(),
+        ]);
+
+
+        // return dd($request->all());
+        foreach ($request->questions as $question) {
+            $q = new QuestionController();
+            $q->store($createdExam->id, $question["question"], $question["mark"], $question["answers"]);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Exam $exam)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +60,7 @@ class ExamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Exam $exam)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +68,7 @@ class ExamController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Exam $exam)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +76,7 @@ class ExamController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Exam $exam)
+    public function destroy(string $id)
     {
         //
     }
