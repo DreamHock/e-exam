@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 
-class QuestionController extends Controller
+class AnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,24 +26,19 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store($examId, $question, $mark, $answers)
+    public function store($questionId, $answer, $correct)
     {
-        $createdQuestion = Question::create([
-            'question' => $question,
-            'mark' => $mark,
-            'exam_id' => $examId
+        Answer::create([
+            'question_id' => $questionId,
+            'answer' => $answer,
+            'correct' => $correct
         ]);
-
-        foreach ($answers as $answer) {
-            $a = new AnswerController();
-            $a->store($createdQuestion->id, $answer["answer"], $answer["correct"]);
-        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Question $question)
+    public function show(Answer $answer)
     {
         //
     }
@@ -51,7 +46,7 @@ class QuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Question $question)
+    public function edit(Answer $answer)
     {
         //
     }
@@ -59,7 +54,7 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, Answer $answer)
     {
         //
     }
@@ -67,7 +62,7 @@ class QuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Question $question)
+    public function destroy(Answer $answer)
     {
         //
     }

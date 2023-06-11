@@ -25,21 +25,18 @@ Route::get('/', function () {
     ]);
 });
 
-
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard-student', function () {
-        return Inertia::render('Student/StudentDashboard');
-    })
-        ->name('student.dashboard')
-        ->middleware('student');
+    Route::middleware('student')->group(function () {
+        Route::get('/dashboard-student', function () {
+            return Inertia::render('Student/StudentDashboard');
+        })
+            ->name('student.dashboard');
+    });
 
-    Route::get('/dashboard-teacher', function () {
-        return Inertia::render('Teacher/TeacherDashboard');
-    })
-        ->name('teacher.dashboard')
-        ->middleware('teacher');
-
-    Route::resource('/exams', ExamController::class);
+    Route::middleware('teacher')->group(function () {
+        Route::resource('exams', ExamController::class)->names(['index' => 'list.exams']);
+        Route::patch('/exams/{id}/updateState', [ExamController::class, 'updateState'])->name('update.state');
+    });
 });
 
 

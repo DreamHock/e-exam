@@ -7,9 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Exam extends Model
 {
+    protected $fillable = [
+        "name",
+        "date",
+        "start",
+        "end",
+        "user_id",
+        "startTime",
+        "endTime"
+    ];
     use HasFactory;
 
-    public function Teacher() {
-        return $this->belongsTo(User::class, 'exam_id');
+    function questions() {
+        return $this->hasMany(Question::class);
     }
 }

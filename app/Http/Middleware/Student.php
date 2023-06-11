@@ -16,7 +16,7 @@ class Student
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->type === "student") {
+        if(Auth::user()->role === "student") {
             return $next($request);
         }
 
