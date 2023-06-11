@@ -14,23 +14,42 @@ const initialState = {
 };
 
 const CreateExam = ({ exam }) => {
+    var eT = parse(exam.end, "hh:mm:ss", new Date());
+    var sT = parse(exam.start, "hh:mm:ss", new Date());
     const [questions, setQuestions] = useState(exam.questions);
     const [show, setShow] = useState(false);
     const [selectedtime, setSelectedTime] = useState({
-        startTime: { hour: 12, minute: 0, time: "am" },
-        endTime: { hour: 12, minute: 0, time: "am" },
+        startTime: {
+            hour: format(sT, "hh"),
+            minute: format(sT, "mm"),
+            time: exam.startTime,
+        },
+        endTime: {
+            hour: format(eT, "hh"),
+            minute: format(eT, "mm"),
+            time: exam.endTime,
+        },
     });
     const [info, setInfo] = useState({
         name: "",
         date: new Date(),
     });
 
-    useEffect(() => {
-        console.log(exam.date);
-        var time = parse(exam.end, 'hh:mm:ss', new Date())
-        const result = format(time, 'hh')
-        console.log(result);
-    }, []);
+    const [ex, setEx] = useState({
+        name: exam.name,
+        date: exam.date,
+        startTime: {
+            hour: format(sT, "hh"),
+            minute: format(sT, "mm"),
+            time: exam.startTime,
+        },
+        endTime: {
+            hour: format(eT, "hh"),
+            minute: format(eT, "mm"),
+            time: exam.endTime,
+        },
+        qs: [...exam.questions],
+    });
 
     const addQuestion = () => {
         setQuestions([...questions, initialState]);
@@ -78,6 +97,7 @@ const CreateExam = ({ exam }) => {
             </div>
 
             <ExamInformations
+                ex={ex}
                 exam={exam}
                 infoHandler={infoHandler}
                 timeHandler={timeHandler}

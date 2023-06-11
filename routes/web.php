@@ -35,7 +35,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('teacher')->group(function () {
-        Route::resource('exams', ExamController::class)->names(['index'=>'list.exams']);
+        Route::resource('exams', ExamController::class)->names(['index' => 'list.exams']);
+        Route::patch('/exams/{id}/updateState', [ExamController::class, 'updateState'])->name('update.state');
     });
 });
 
