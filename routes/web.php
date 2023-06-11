@@ -35,11 +35,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::middleware('teacher')->group(function () {
-        Route::get('/dashboard-teacher', function () {
-            return Inertia::render('Teacher/TeacherDashboard');
-        })
-            ->name('teacher.dashboard');
-        Route::resource('exams', ExamController::class);
+        Route::resource('exams', ExamController::class)->names(['index'=>'list.exams']);
     });
 });
 

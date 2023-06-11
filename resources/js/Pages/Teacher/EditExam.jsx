@@ -1,10 +1,11 @@
 import AuthLayoutTeacher from "@/Layouts/AuthLayoutTeacher";
 import QuestionAnswers from "./components/QuestionAnswers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { router } from "@inertiajs/react";
 import ExamInformations from "./components/ExamInformations";
 import Test from "@/Components/Test";
+import { format, parse } from "date-fns";
 
 const initialState = {
     question: "",
@@ -12,8 +13,8 @@ const initialState = {
     answers: [],
 };
 
-const CreateExam = () => {
-    const [questions, setQuestions] = useState([initialState]);
+const CreateExam = ({ exam }) => {
+    const [questions, setQuestions] = useState(exam.questions);
     const [show, setShow] = useState(false);
     const [selectedtime, setSelectedTime] = useState({
         startTime: { hour: 12, minute: 0, time: "am" },
@@ -23,6 +24,13 @@ const CreateExam = () => {
         name: "",
         date: new Date(),
     });
+
+    useEffect(() => {
+        console.log(exam.date);
+        var time = parse(exam.end, 'hh:mm:ss', new Date())
+        const result = format(time, 'hh')
+        console.log(result);
+    }, []);
 
     const addQuestion = () => {
         setQuestions([...questions, initialState]);
@@ -70,6 +78,7 @@ const CreateExam = () => {
             </div>
 
             <ExamInformations
+                exam={exam}
                 infoHandler={infoHandler}
                 timeHandler={timeHandler}
             />

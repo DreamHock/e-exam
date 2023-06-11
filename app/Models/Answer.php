@@ -13,4 +13,10 @@ class Answer extends Model
         'correct'
     ];
     use HasFactory;
+
+    function question()
+    {
+        return $this->belongsTo(Answer::class);
+    }
+
 }

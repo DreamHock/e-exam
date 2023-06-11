@@ -6,9 +6,9 @@ const AuthLayoutTeacher = ({ children }) => {
     return (
         <div className=" min-h-screen bg-slate-100 flex">
             <aside className="py-2 px-4 sm:w-1/6 flex flex-col items-center">
-                <a href={route("teacher.dashboard")} id="logo" className=" mb-6">Teacher</a>
+                <a href={route("list.exams")} id="logo" className=" mb-6">Teacher</a>
                 <div className=" flex flex-col items-center">
-                    <NavLink href={route("teacher.dashboard")}>List exams</NavLink>
+                    <NavLink href={route("list.exams")}>List exams</NavLink>
                     <NavLink href={route('exams.create')}>Create an exam</NavLink>
                 </div>
             </aside>

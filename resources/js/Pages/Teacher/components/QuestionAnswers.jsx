@@ -64,8 +64,8 @@ const QuestionAnswers = ({
     };
     return (
         <>
-            <div className="flex">
-                <div className=" border-2 rounded-md border-indigo-500 flex">
+            <div className="flex bg-white rounded-md shadow-md">
+                <div className=" rounded-md flex">
                     <div className="p-2">
                         <InputLabel>Question {number}</InputLabel>
                         <Question className=" mb-4" q={q} setQ={setQ} />

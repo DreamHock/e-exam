@@ -17,7 +17,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     {!user ? (
                         <>
                             <Link
-                                href='login/teachers'
+                                href="login/teachers"
                                 // className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 <SecondaryButton color="red" className="">
@@ -27,19 +27,20 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             <div className="font-bold">Or</div>
 
                             <Link
-                                href='login/students'
+                                href="login/students"
                                 // className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 <SecondaryButton>Student</SecondaryButton>
                             </Link>
                         </>
+                    ) : user.role == "teacher" ? (
+                        <Link href={route("list.exams")}>
+                            <SecondaryButton>List exams</SecondaryButton>
+                        </Link>
                     ) : (
-                        <>
-                            <Link href={route("dashboard")}>
-                                <SecondaryButton>dashboard</SecondaryButton>
-                            </Link>
-                            {/* <Link href={route("exams")}>Exams</Link> */}
-                        </>
+                        <Link href={route("student.dashboard")}>
+                            <SecondaryButton>dashboard</SecondaryButton>
+                        </Link>
                     )}
                 </div>
             </div>

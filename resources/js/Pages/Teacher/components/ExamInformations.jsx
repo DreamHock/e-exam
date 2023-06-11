@@ -4,7 +4,7 @@ import TextInput from "@/Components/TextInput";
 import TimePicker from "@/Components/TimePicker";
 import React from "react";
 
-const ExamInformations = ({ timeHandler, infoHandler }) => {
+const ExamInformations = ({ timeHandler, infoHandler, exam }) => {
     return (
         <div className=" mb-4 w-96 flex flex-col self-end gap-4">
             <h2 className="mb-2">Exam informations</h2>

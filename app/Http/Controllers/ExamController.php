@@ -15,7 +15,8 @@ class ExamController  extends Controller
      */
     public function index()
     {
-        //
+        $exams = Exam::all();
+        return Inertia::render('Teacher/ListExams', ["exams" => $exams]);
     }
 
     /**
@@ -62,7 +63,8 @@ class ExamController  extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $editedExam = Exam::with('questions.answers')->find($id);
+        return Inertia::render('Teacher/EditExam', ['exam' => $editedExam]);
     }
 
     /**
@@ -70,14 +72,19 @@ class ExamController  extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $updatedExam = Exam::find($id);
+        $updatedExam->isActive = $request->enabled;
+        $updatedExam->save();
+        // return $id;
+        // return dd($request->enabled);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Exam $exam)
     {
-        //
+        // return $exam;
+        $exam->delete();
     }
 }

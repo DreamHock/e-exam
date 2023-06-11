@@ -17,8 +17,9 @@ return new class extends Migration
             $table->date('date');
             $table->time('start');
             $table->time('end');
-            $table->string('startTime');
-            $table->string('endtime');
+            $table->string('startTime')->nullable();
+            $table->string('endtime')->nullable();
+            $table->boolean('isActive')->default(0);
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });

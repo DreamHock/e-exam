@@ -38,7 +38,7 @@ class UserController extends Controller
             // Check if the user is a teacher or a student
             $user = Auth::user();
             if ($user->role == 'teacher') {
-                return redirect()->intended('/dashboard-teacher');
+                return redirect()->intended('/exams');
             } else if ($user->role == 'student') {
                 return redirect()->intended('/dashboard-student');
             } else {

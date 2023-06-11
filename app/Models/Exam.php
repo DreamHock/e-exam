@@ -17,4 +17,8 @@ class Exam extends Model
         "endTime"
     ];
     use HasFactory;
+
+    function questions() {
+        return $this->hasMany(Question::class);
+    }
 }
