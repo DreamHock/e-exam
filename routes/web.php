@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware('teacher')->group(function () {
         Route::resource('exams', ExamController::class)->names(['index'=>'list.exams']);
+        Route::resource('groups', GroupController::class);
     });
 });
 

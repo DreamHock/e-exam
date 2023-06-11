@@ -4,12 +4,14 @@ import React from "react";
 
 const AuthLayoutTeacher = ({ children }) => {
     return (
-        <div className=" min-h-screen bg-slate-100 flex">
+        <div className=" min-h-screen max-h-fit bg-slate-100 flex">
             <aside className="py-2 px-4 sm:w-1/6 flex flex-col items-center">
                 <a href={route("list.exams")} id="logo" className=" mb-6">Teacher</a>
                 <div className=" flex flex-col items-center">
                     <NavLink href={route("list.exams")}>List exams</NavLink>
                     <NavLink href={route('exams.create')}>Create an exam</NavLink>
+                    <NavLink href={route('groups.index')}>List group</NavLink>
+                    <NavLink href={route('groups.create')}>Create a group</NavLink>
                 </div>
             </aside>
             <div className="w-full">
@@ -18,7 +20,7 @@ const AuthLayoutTeacher = ({ children }) => {
                         Logout
                     </NavLink>
                 </header>
-                <div className=" p-4">{children}</div>
+                <div className="h-fit p-4">{children}</div>
             </div>
         </div>
     );

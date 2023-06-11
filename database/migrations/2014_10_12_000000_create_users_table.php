@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('role');
-            $table->foreignId('group_id')->nullable()->constrained("groups");
+            $table->foreignId('group_id')->nullable()->constrained("groups")->cascadeOnUpdate();
             $table->rememberToken();
             $table->timestamps();
         });
