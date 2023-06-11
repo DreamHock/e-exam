@@ -1,10 +1,9 @@
 import AuthLayoutTeacher from "@/Layouts/AuthLayoutTeacher";
 import QuestionAnswers from "./components/QuestionAnswers";
-import { useState } from "react";
+import { useEffect } from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
-import { router } from "@inertiajs/react";
+import { useForm } from "@inertiajs/react";
 import ExamInformations from "./components/ExamInformations";
-import Test from "@/Components/Test";
 
 const initialState = {
     question: "",
@@ -12,49 +11,42 @@ const initialState = {
     answers: [],
 };
 
-const CreateExam = () => {
-    const [questions, setQuestions] = useState([initialState]);
-    const [show, setShow] = useState(false);
-    const [selectedtime, setSelectedTime] = useState({
-        startTime: { hour: 12, minute: 0, time: "am" },
-        endTime: { hour: 12, minute: 0, time: "am" },
-    });
-    const [info, setInfo] = useState({
+const CreateExam = ({ exam }) => {
+    useEffect(() => {
+        console.log(exam);
+    }, []);
+
+    const { data, setData, post } = useForm({
         name: "",
-        date: new Date(),
+        date: "",
+        startTime: {
+            hour: "",
+            minute: "",
+            time: "",
+        },
+        endTime: {
+            hour: "",
+            minute: "",
+            time: "",
+        },
+        qs: [
+            {
+                question: "",
+                mark: 0,
+                answers: [],
+            },
+        ],
     });
 
     const addQuestion = () => {
-        setQuestions([...questions, initialState]);
-    };
-    const deleteQuestion = (index) => {
-        const updatedQuestions = [...questions];
-        updatedQuestions.splice(index, 1);
-        setQuestions(updatedQuestions);
+        setData("qs", [...data.qs, initialState]);
     };
 
     const submitHandler = () => {
-        router.post("/exams", {
-            name: info.name,
-            date: info.date,
-            ...selectedtime,
-            questions: questions,
+        post("/exams", {
+            data,
         });
     };
-
-    const timeHandler = (time, target, value) => {
-        const updatedTime = { ...selectedtime };
-        updatedTime[time][target] = value;
-        setSelectedTime(updatedTime);
-    };
-
-    const infoHandler = (target, value) => {
-        const updatedInfo = { ...info };
-        updatedInfo[target] = value;
-        setInfo(updatedInfo);
-    };
-
-    const otherInfoHandler = () => {};
 
     return (
         <AuthLayoutTeacher>
@@ -69,20 +61,16 @@ const CreateExam = () => {
                 </PrimaryButton>
             </div>
 
-            <ExamInformations
-                infoHandler={infoHandler}
-                timeHandler={timeHandler}
-            />
+            <ExamInformations setData={setData} data={data} />
             <h2 className="">Questions</h2>
             <div className="flex flex-wrap gap-4">
-                {questions.map((question, index) => {
+                {data.qs.map((question, index) => {
                     return (
                         <QuestionAnswers
-                            questions={questions}
-                            setQuestions={setQuestions}
+                            question={question}
+                            data={data}
+                            setData={setData}
                             index={index}
-                            deleteQuestion={deleteQuestion}
-                            number={index + 1}
                         />
                     );
                 })}

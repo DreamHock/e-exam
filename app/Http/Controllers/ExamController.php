@@ -32,6 +32,7 @@ class ExamController  extends Controller
      */
     public function store(Request $request)
     {
+        // return dd($request);
         $createdExam = Exam::create([
             "name" => $request->name,
             "date" => $request->date,
@@ -44,7 +45,7 @@ class ExamController  extends Controller
 
 
         // return dd($request->all());
-        foreach ($request->questions as $question) {
+        foreach ($request->qs as $question) {
             $q = new QuestionController();
             $q->store($createdExam->id, $question["question"], $question["mark"], $question["answers"]);
         }
@@ -70,13 +71,20 @@ class ExamController  extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateState(Request $request, string $id)
     {
         $updatedExam = Exam::find($id);
         $updatedExam->isActive = $request->enabled;
         $updatedExam->save();
-        // return $id;
-        // return dd($request->enabled);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $updatedExam = Exam::find($id);
+        // return dd($updatedExam);
+        $this->destroy($updatedExam);
+        $this->store($request);
+        return redirect()->route('list.exams');
     }
 
     /**
@@ -84,7 +92,6 @@ class ExamController  extends Controller
      */
     public function destroy(Exam $exam)
     {
-        // return $exam;
         $exam->delete();
     }
 }

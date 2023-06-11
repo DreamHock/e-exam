@@ -19,21 +19,27 @@ const hours = [
 const minutes = ["00", "15", "30", "45"];
 const times = ["am", "pm"];
 
-export default function Test({ timeHandler, time }) {
-    const [selectedHour, setSelectedHour] = useState(hours[0]);
-    const [selectedMinute, setSelectedMinute] = useState(minutes[0]);
-    const [selectedTime, setSelectedTime] = useState(times[0]);
+export default function Test({ time, data, setData }) {
+    const [selectedHour, setSelectedHour] = useState(data[time].hour ? data[time].hour : hours[0]);
+    const [selectedMinute, setSelectedMinute] = useState(data[time].minute ? data[time].minute : minutes[0]);
+    const [selectedTime, setSelectedTime] = useState(data[time].time ? data[time].time : times[0]);
 
     useEffect(() => {
-        timeHandler(time, "hour", selectedHour);
+        let t = data[time];
+        t["hour"] = selectedHour;
+        setData(time, t);
     }, [selectedHour]);
 
     useEffect(() => {
-        timeHandler(time, "minute", selectedMinute);
+        let t = data[time];
+        t["minute"] = selectedMinute;
+        setData(time, t);
     }, [selectedMinute]);
 
     useEffect(() => {
-        timeHandler(time, "time", selectedTime);
+        let t = data[time];
+        t["time"] = selectedTime;
+        setData(time, t);
     }, [selectedTime]);
 
     return (

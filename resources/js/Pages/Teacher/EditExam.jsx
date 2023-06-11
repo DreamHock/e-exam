@@ -2,9 +2,8 @@ import AuthLayoutTeacher from "@/Layouts/AuthLayoutTeacher";
 import QuestionAnswers from "./components/QuestionAnswers";
 import { useEffect, useState } from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
-import { router } from "@inertiajs/react";
+import { router, useForm } from "@inertiajs/react";
 import ExamInformations from "./components/ExamInformations";
-import Test from "@/Components/Test";
 import { format, parse } from "date-fns";
 
 const initialState = {
@@ -13,56 +12,35 @@ const initialState = {
     answers: [],
 };
 
-const CreateExam = ({ exam }) => {
-    const [questions, setQuestions] = useState(exam.questions);
-    const [show, setShow] = useState(false);
-    const [selectedtime, setSelectedTime] = useState({
-        startTime: { hour: 12, minute: 0, time: "am" },
-        endTime: { hour: 12, minute: 0, time: "am" },
-    });
-    const [info, setInfo] = useState({
-        name: "",
-        date: new Date(),
-    });
+const EditExam = ({ exam }) => {
+    var eT = parse(exam.end, "hh:mm:ss", new Date());
+    var sT = parse(exam.start, "hh:mm:ss", new Date());
 
-    useEffect(() => {
-        console.log(exam.date);
-        var time = parse(exam.end, 'hh:mm:ss', new Date())
-        const result = format(time, 'hh')
-        console.log(result);
-    }, []);
+    const { data, setData, put } = useForm({
+        name: exam.name,
+        date: exam.date,
+        startTime: {
+            hour: format(sT, "hh"),
+            minute: format(sT, "mm"),
+            time: exam.startTime,
+        },
+        endTime: {
+            hour: format(eT, "hh"),
+            minute: format(eT, "mm"),
+            time: exam.endtime,
+        },
+        qs: [...exam.questions],
+    });
 
     const addQuestion = () => {
-        setQuestions([...questions, initialState]);
-    };
-    const deleteQuestion = (index) => {
-        const updatedQuestions = [...questions];
-        updatedQuestions.splice(index, 1);
-        setQuestions(updatedQuestions);
+        setData("qs", [...data.qs, initialState]);
     };
 
     const submitHandler = () => {
-        router.post("/exams", {
-            name: info.name,
-            date: info.date,
-            ...selectedtime,
-            questions: questions,
+        put(`/exams/${exam.id}`, {
+            data,
         });
     };
-
-    const timeHandler = (time, target, value) => {
-        const updatedTime = { ...selectedtime };
-        updatedTime[time][target] = value;
-        setSelectedTime(updatedTime);
-    };
-
-    const infoHandler = (target, value) => {
-        const updatedInfo = { ...info };
-        updatedInfo[target] = value;
-        setInfo(updatedInfo);
-    };
-
-    const otherInfoHandler = () => {};
 
     return (
         <AuthLayoutTeacher>
@@ -73,25 +51,20 @@ const CreateExam = ({ exam }) => {
                     type="submit"
                     className=""
                 >
-                    Create exam
+                    Save changes
                 </PrimaryButton>
             </div>
 
-            <ExamInformations
-                exam={exam}
-                infoHandler={infoHandler}
-                timeHandler={timeHandler}
-            />
+            <ExamInformations setData={setData} data={data} />
             <h2 className="">Questions</h2>
             <div className="flex flex-wrap gap-4">
-                {questions.map((question, index) => {
+                {data.qs.map((question, index) => {
                     return (
                         <QuestionAnswers
-                            questions={questions}
-                            setQuestions={setQuestions}
+                            question={question}
+                            data={data}
+                            setData={setData}
                             index={index}
-                            deleteQuestion={deleteQuestion}
-                            number={index + 1}
                         />
                     );
                 })}
@@ -108,4 +81,4 @@ const CreateExam = ({ exam }) => {
     );
 };
 
-export default CreateExam;
+export default EditExam;

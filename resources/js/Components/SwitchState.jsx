@@ -4,7 +4,7 @@ import { useForm } from "@inertiajs/react";
 
 export default function SwitchState({ exam }) {
     // const [enabled, setEnabled] = useState(false);
-    const { data, setData, processing, put } = useForm({
+    const { data, setData, processing, patch } = useForm({
         enabled: exam.isActive,
     });
 
@@ -18,7 +18,7 @@ export default function SwitchState({ exam }) {
             console.log("d5ol");
             return;
         }
-        put(`/exams/${exam.id}`, { enabled: data.enabled });
+        patch(`/exams/${exam.id}/updateState`, { enabled: data.enabled });
     }, [data.enabled]);
 
     return (
