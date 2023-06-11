@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from '../../../Components/Checkbox';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 
@@ -69,6 +69,7 @@ export default function TransferList({ left = [], setLeft = [], right, setRight 
 
           return (
             <ListItem
+              className=' flex gap-4'
               key={index}
               role="listitem"
               button
@@ -95,7 +96,7 @@ export default function TransferList({ left = [], setLeft = [], right, setRight 
   return (
     <Grid container spacing={2} zIndex={0} justifyContent="center" alignItems="center">
       <Grid sx={{ textAlign: "center" }} item>
-        availeble students
+        Available students
         {customList(left)}
       </Grid>
 
@@ -148,7 +149,7 @@ export default function TransferList({ left = [], setLeft = [], right, setRight 
       </Grid>
 
       <Grid sx={{textAlign:'center'}} item>
-        choosen students
+        Chosen students
         {
           customList(right)
         }
