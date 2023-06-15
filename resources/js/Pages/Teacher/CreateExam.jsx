@@ -18,17 +18,17 @@ const CreateExam = ({ exam }) => {
 
     const { data, setData, post } = useForm({
         name: "",
-        date: "",
-        startTime: {
-            hour: "",
-            minute: "",
-            time: "",
-        },
-        endTime: {
-            hour: "",
-            minute: "",
-            time: "",
-        },
+        // date: "",
+        // startTime: {
+        //     hour: "",
+        //     minute: "",
+        //     time: "",
+        // },
+        // endTime: {
+        //     hour: "",
+        //     minute: "",
+        //     time: "",
+        // },
         qs: [
             {
                 question: "",

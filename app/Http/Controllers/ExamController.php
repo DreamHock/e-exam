@@ -35,11 +35,11 @@ class ExamController  extends Controller
         // return dd($request);
         $createdExam = Exam::create([
             "name" => $request->name,
-            "date" => $request->date,
-            "start" => $request->startTime["hour"] . ":" . $request->startTime["minute"] . ":00",
-            "startTime" => $request->startTime["time"],
-            "end" => $request->endTime["hour"] . ":" . $request->endTime["minute"] . ":00",
-            "endTime" => $request->endTime["time"],
+            // "date" => $request->date,
+            // "start" => $request->startTime["hour"] . ":" . $request->startTime["minute"] . ":00",
+            // "startTime" => $request->startTime["time"],
+            // "end" => $request->endTime["hour"] . ":" . $request->endTime["minute"] . ":00",
+            // "endTime" => $request->endTime["time"],
             "user_id" => Auth::id(),
         ]);
 

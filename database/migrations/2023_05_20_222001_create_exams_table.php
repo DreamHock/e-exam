@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->date('date');
-            $table->time('start');
-            $table->time('end');
-            $table->string('startTime')->nullable();
-            $table->string('endtime')->nullable();
+            // $table->date('date');
+            // $table->time('start');
+            // $table->time('end');
+            // $table->string('startTime')->nullable();
+            // $table->string('endtime')->nullable();
             $table->boolean('isActive')->default(0);
             $table->foreignId('user_id')->constrained('users');
             $table->timestamps();

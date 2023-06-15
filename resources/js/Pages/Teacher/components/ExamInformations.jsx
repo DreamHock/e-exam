@@ -19,7 +19,7 @@ const ExamInformations = ({ data, setData }) => {
                     value={data.name}
                 />
             </div>
-            <div>
+            {/* <div>
                 <InputLabel htmlFor="date">Date</InputLabel>
                 <input
                     onChange={(e) => setData("date", e.target.value)}
@@ -28,8 +28,8 @@ const ExamInformations = ({ data, setData }) => {
                     type="date"
                     value={data.date}
                 />
-            </div>
-            <div className="flex gap-10">
+            </div> */}
+            {/* <div className="flex gap-10">
                 <div>
                     <InputLabel htmlFor="start-time">Start time</InputLabel>
                     <Test time="startTime" data={data} setData={setData} />
@@ -38,7 +38,7 @@ const ExamInformations = ({ data, setData }) => {
                     <InputLabel htmlFor="end-time">End time</InputLabel>
                     <Test time="endTime" data={data} setData={setData} />
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

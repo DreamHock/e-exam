@@ -18,17 +18,17 @@ const EditExam = ({ exam }) => {
 
     const { data, setData, put } = useForm({
         name: exam.name,
-        date: exam.date,
-        startTime: {
-            hour: format(sT, "hh"),
-            minute: format(sT, "mm"),
-            time: exam.startTime,
-        },
-        endTime: {
-            hour: format(eT, "hh"),
-            minute: format(eT, "mm"),
-            time: exam.endtime,
-        },
+        // date: exam.date,
+        // startTime: {
+        //     hour: format(sT, "hh"),
+        //     minute: format(sT, "mm"),
+        //     time: exam.startTime,
+        // },
+        // endTime: {
+        //     hour: format(eT, "hh"),
+        //     minute: format(eT, "mm"),
+        //     time: exam.endtime,
+        // },
         qs: [...exam.questions],
     });
 

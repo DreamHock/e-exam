@@ -24,9 +24,9 @@ const ListExams = ({ exams }) => {
                         <tr className=" child:text-start child:p-2">
                             <th>Controle name</th>
                             <th>Date</th>
-                            <th>Start at</th>
+                            {/* <th>Start at</th>
                             <th>End at</th>
-                            <th>State</th>
+                            <th>State</th> */}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -35,13 +35,13 @@ const ListExams = ({ exams }) => {
                             return (
                                 <tr key={exam.id} className=" child:p-2">
                                     <td>{exam.name}</td>
-                                    <td>{exam.date}</td>
+                                    {/* <td>{exam.date}</td>
                                     <td>
                                         {exam.start} {exam.startTime}
                                     </td>
                                     <td>
                                         {exam.end} {exam.endtime}
-                                    </td>
+                                    </td> */}
                                     <td className="">
                                         <SwitchState exam={exam} />
                                     </td>
