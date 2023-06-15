@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import Checkbox from "@/Components/Checkbox";
-import GuestTeacher from "@/Layouts/GuestLayoutTeacher";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm } from "@inertiajs/react";
+import Guest from "@/Layouts/GuestLayout";
 
 export default function Login({ status, canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -23,13 +23,12 @@ export default function Login({ status, canResetPassword }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route("login.teachers"));
+        post(route("login"));
     };
 
     return (
-        <GuestTeacher>
+        <Guest>
             <Head title="Log in" />
-            <h2>teacher</h2>
             {status && (
                 <div className="mb-4 font-medium text-sm text-green-600">
                     {status}
@@ -91,6 +90,6 @@ export default function Login({ status, canResetPassword }) {
                     </PrimaryButton>
                 </div>
             </form>
-        </GuestTeacher>
+        </Guest>
     );
 }

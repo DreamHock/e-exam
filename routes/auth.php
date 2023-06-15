@@ -21,19 +21,25 @@ Route::middleware('guest')->group(function () {
 
     // Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::prefix('login')->group(function () {
-        Route::get('/teachers', function () {
-            return Inertia::render('Auth/LoginTeacher');
-        });
-        Route::post('/teachers', [UserController::class, 'login'])
-            ->name('login.teachers');
-
-        Route::get('/students', function () {
-            return Inertia::render('Auth/LoginStudent');
-        });
-        Route::post('/students', [UserController::class, 'login'])
-            ->name('login.students');
+    Route::get('/login', function () {
+        return Inertia::render('Auth/login');
     });
+    Route::post('/login', [UserController::class, 'login'])
+        ->name('login');
+
+    // Route::prefix('login')->group(function () {
+    //     Route::get('/teachers', function () {
+    //         return Inertia::render('Auth/LoginTeacher');
+    //     });
+    //     Route::post('/teachers', [UserController::class, 'login'])
+    //         ->name('login.teachers');
+
+    //     Route::get('/students', function () {
+    //         return Inertia::render('Auth/LoginStudent');
+    //     });
+    //     Route::post('/students', [UserController::class, 'login'])
+    //         ->name('login.students');
+    // });
 
     // Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
     //             ->name('password.request');

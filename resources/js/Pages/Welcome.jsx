@@ -17,21 +17,21 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     {!user ? (
                         <>
                             <Link
-                                href="login/teachers"
+                                href={route('login')}
                                 // className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 <SecondaryButton color="red" className="">
-                                    Teacher
+                                    Login
                                 </SecondaryButton>
                             </Link>
-                            <div className="font-bold">Or</div>
+                            {/* <div className="font-bold">Or</div>
 
                             <Link
                                 href="login/students"
                                 // className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
                             >
                                 <SecondaryButton>Student</SecondaryButton>
-                            </Link>
+                            </Link> */}
                         </>
                     ) : user.role == "teacher" ? (
                         <Link href={route("list.exams")}>

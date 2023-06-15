@@ -34,8 +34,6 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // return dd('hello');
-            // Check if the user is a teacher or a student
             $user = Auth::user();
             if ($user->role == 'teacher') {
                 return redirect()->intended('/exams');
