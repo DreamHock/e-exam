@@ -21,4 +21,8 @@ class Exam extends Model
     function questions() {
         return $this->hasMany(Question::class);
     }
+    
+    public function groups(){
+        return $this->belongsToMany(Group::class,"invitations");
+    }
 }
