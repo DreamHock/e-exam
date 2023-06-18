@@ -94,4 +94,6 @@ class ExamController  extends Controller
     {
         $exam->delete();
     }
+
+    
 }

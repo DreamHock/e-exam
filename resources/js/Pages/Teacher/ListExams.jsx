@@ -1,12 +1,13 @@
+import MultipleSelect from "@/Components/MultipleSelect";
 import SwitchState from "@/Components/SwitchState";
 import AuthLayoutTeacher from "@/Layouts/AuthLayoutTeacher";
 import { router } from "@inertiajs/react";
 import React, { useEffect } from "react";
+import { useState } from "react";
 
-const ListExams = ({ exams }) => {
-    useEffect(() => {
-        console.log(exams);
-    }, [exams]);
+const ListExams = ({ exams, groups }) => {
+
+    const [invitedGroups, setInvitedGroups] = useState([])
 
     const handleDeleteExam = (examId) => {
         router.delete(`/exams/${examId}`);
@@ -45,7 +46,7 @@ const ListExams = ({ exams }) => {
                                     <td className="">
                                         <SwitchState exam={exam} />
                                     </td>
-                                    <td className="w-fit">
+                                    <td className="w-fit flex">
                                         <div
                                             onClick={() => {
                                                 handleEditExam(exam.id);
@@ -58,10 +59,18 @@ const ListExams = ({ exams }) => {
                                             onClick={() => {
                                                 handleDeleteExam(exam.id);
                                             }}
-                                            className=" cursor-pointer p-2 rounded-r bg-red-200 hover:bg-red-300 text-red-800 inline select-none"
+                                            className=" cursor-pointer p-2 bg-red-200 hover:bg-red-300 text-red-800 inline select-none"
                                         >
                                             Delete
                                         </div>
+                                        <div
+                                            onClick={() => {
+                                            }}
+                                            className=" cursor-pointer p-2 rounded-r bg-green-200 hover:bg-green-300 text-green-800 inline select-none"
+                                        >
+                                            Affect
+                                        </div>
+                                        <MultipleSelect className="h-4"/>
                                     </td>
                                 </tr>
                             );

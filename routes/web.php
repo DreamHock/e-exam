@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
             return Inertia::render('Student/StudentDashboard');
         })
             ->name('student.dashboard');
+        Route::get('/future-exams', [ExamController::class, 'futureExams'])->name('future.exams');
+        Route::get('/passed-exams', [ExamController::class, 'passedExams'])->name('passed.exams');
     });
 
     Route::middleware('teacher')->group(function () {

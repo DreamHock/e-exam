@@ -8,10 +8,8 @@ const AuthLayoutStudent = ({ children }) => {
             <aside className="py-2 px-4 sm:w-1/6 flex flex-col items-center">
                 <a href={route("list.exams")} id="logo" className=" mb-6">Teacher</a>
                 <div className=" flex flex-col items-center">
-                    <NavLink href={route("list.exams")}>List exams</NavLink>
-                    <NavLink href={route('exams.create')}>Create an exam</NavLink>
-                    <NavLink href={route('groups.index')}>List group</NavLink>
-                    <NavLink href={route('groups.create')}>Create a group</NavLink>
+                    <NavLink href={route("future.exams")}>Future exams</NavLink>
+                    <NavLink href={route('passed.exams')}>Passed exams</NavLink>
                 </div>
             </aside>
             <div className="w-full">

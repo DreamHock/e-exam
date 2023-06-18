@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId("exam_id")->constrained("exams")->cascadeOnDelete()->cascadeOnUpdate();
             $table->date("date");
             $table->time("start_at");
+            $table->string("startTime");
             $table->time("end_at");
+            $table->string("endTime");
             $table->timestamps();
         });
     }
