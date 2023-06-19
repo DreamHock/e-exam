@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\Group;
+use App\Models\Invitation;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +18,14 @@ class ExamController  extends Controller
     public function index()
     {
         $exams = Exam::all();
-        return Inertia::render('Teacher/ListExams', ["exams" => $exams]);
+        foreach ($exams as $exam) {
+            $exam->Groups = $exam->groups()->get();
+            $exam->Dates = Invitation::where("exam_id",$exam->id)->first();
+        }
+        
+
+        $groups = Group::all();
+        return Inertia::render('Teacher/ListExams', ["exams" => $exams,"groups"=>$groups]);
     }
 
     /**

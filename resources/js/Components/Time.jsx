@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Listbox } from "@headlessui/react";
+import { format, parse } from "date-fns";
+
 // import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
 const hours = [
@@ -19,10 +21,17 @@ const hours = [
 const minutes = ["00", "15", "30", "45"];
 const times = ["am", "pm"];
 
-export default function Test({ time, data, setData }) {
-    const [selectedHour, setSelectedHour] = useState(data[time].hour ? data[time].hour : hours[0]);
-    const [selectedMinute, setSelectedMinute] = useState(data[time].minute ? data[time].minute : minutes[0]);
-    const [selectedTime, setSelectedTime] = useState(data[time].time ? data[time].time : times[0]);
+export default function Test({ modelState, setModelState, time }) {
+    var date = modelState.exame && modelState.exame.Dates && parse(modelState.exame.Dates[`${time}_at`], "hh:mm:ss", new Date())
+
+    var t = modelState.exame && modelState.exame.Dates && modelState.exame.Dates[`${time}Time`]
+
+    const [selectedHour, setSelectedHour] = useState(modelState.exame && modelState.exame.Dates ? format(date, "hh") : hours[0]);
+
+    const [selectedMinute, setSelectedMinute] = useState(modelState.exame && modelState.exame.Dates ? format(date, "mm") : minutes[0]);
+
+    const [selectedTime, setSelectedTime] = useState(t ? t : times[0]);
+
 
     useEffect(() => {
         let t = data[time];
@@ -30,17 +39,17 @@ export default function Test({ time, data, setData }) {
         setData(time, t);
     }, [selectedHour]);
 
-    useEffect(() => {
-        let t = data[time];
-        t["minute"] = selectedMinute;
-        setData(time, t);
-    }, [selectedMinute]);
+    // useEffect(() => {
+    //     let t = data[time];
+    //     t["minute"] = selectedMinute;
+    //     setData(time, t);
+    // }, [selectedMinute]);
 
-    useEffect(() => {
-        let t = data[time];
-        t["time"] = selectedTime;
-        setData(time, t);
-    }, [selectedTime]);
+    // useEffect(() => {
+    //     let t = data[time];
+    //     t["time"] = selectedTime;
+    //     setData(time, t);
+    // }, [selectedTime]);
 
     return (
         <div className=" flex gap-2 items-center">
@@ -55,15 +64,14 @@ export default function Test({ time, data, setData }) {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     > */}
-                    <Listbox.Options className="absolute mt-1 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+                    <Listbox.Options className=" absolute mt-1 w-[120px] flex flex-wrap overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
                         {hours.map((hour, hourIdx) => (
                             <Listbox.Option
                                 key={hourIdx}
                                 className={({ active }) =>
-                                    `relative cursor-default select-none py-2 flex justify-center ${
-                                        active
-                                            ? "bg-amber-100 text-amber-900"
-                                            : "text-gray-900"
+                                    `relative cursor-default select-none py-2 flex justify-center border-1 w-[40px] border-red-500 ${active
+                                        ? "bg-amber-100 text-amber-900"
+                                        : "text-gray-900"
                                     }`
                                 }
                                 value={hour}
@@ -92,10 +100,9 @@ export default function Test({ time, data, setData }) {
                             <Listbox.Option
                                 key={minuteIdx}
                                 className={({ active }) =>
-                                    `relative cursor-default select-none py-2 flex justify-center ${
-                                        active
-                                            ? "bg-amber-100 text-amber-900"
-                                            : "text-gray-900"
+                                    `relative cursor-default select-none py-2 flex justify-center ${active
+                                        ? "bg-amber-100 text-amber-900"
+                                        : "text-gray-900"
                                     }`
                                 }
                                 value={minute}
@@ -123,10 +130,9 @@ export default function Test({ time, data, setData }) {
                             <Listbox.Option
                                 key={timeIdx}
                                 className={({ active }) =>
-                                    `relative cursor-default select-none py-2 flex justify-center ${
-                                        active
-                                            ? "bg-amber-100 text-amber-900"
-                                            : "text-gray-900"
+                                    `relative cursor-default select-none py-2 flex justify-center ${active
+                                        ? "bg-amber-100 text-amber-900"
+                                        : "text-gray-900"
                                     }`
                                 }
                                 value={time}

@@ -1,3 +1,4 @@
+import MyModal from "@/Components/Modal";
 import MultipleSelect from "@/Components/MultipleSelect";
 import SwitchState from "@/Components/SwitchState";
 import AuthLayoutTeacher from "@/Layouts/AuthLayoutTeacher";
@@ -7,8 +8,25 @@ import { useState } from "react";
 
 const ListExams = ({ exams, groups }) => {
 
-    const [invitedGroups, setInvitedGroups] = useState([])
+    const [modelState,setModelState] = useState({
+        open : false,
+        exame : null ,
+        times : {
+            startTime: {
+                hour: "",
+                minute: "",
+                time: "",
+            },
+            endTime: {
+                hour: "",
+                minute: "",
+                time: "",
+            },
+        }
 
+    })
+    const [invitedGroups, setInvitedGroups] = useState([...groups])
+    const [examsState, setExamsList] = useState([...exams])
     const handleDeleteExam = (examId) => {
         router.delete(`/exams/${examId}`);
     };
@@ -17,6 +35,12 @@ const ListExams = ({ exams, groups }) => {
         router.get(`/exams/${examId}/edit`);
     };
 
+    const handerAffectExam = (examId,chosenGroups)=>{
+        
+    }
+
+    
+
     return (
         <AuthLayoutTeacher>
             <div>
@@ -24,7 +48,7 @@ const ListExams = ({ exams, groups }) => {
                     <thead>
                         <tr className=" child:text-start child:p-2">
                             <th>Controle name</th>
-                            <th>Date</th>
+                            <th>state</th>
                             {/* <th>Start at</th>
                             <th>End at</th>
                             <th>State</th> */}
@@ -32,7 +56,7 @@ const ListExams = ({ exams, groups }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {exams.map((exam, index) => {
+                        {examsState.map((exam, index) => {
                             return (
                                 <tr key={exam.id} className=" child:p-2">
                                     <td>{exam.name}</td>
@@ -46,12 +70,12 @@ const ListExams = ({ exams, groups }) => {
                                     <td className="">
                                         <SwitchState exam={exam} />
                                     </td>
-                                    <td className="w-fit flex">
+                                    <td className="w-fit flex items-center">
                                         <div
                                             onClick={() => {
                                                 handleEditExam(exam.id);
                                             }}
-                                            className=" cursor-pointer p-2 rounded-l bg-sky-200 hover:bg-sky-300 text-sky-800 inline select-none"
+                                            className=" h-fit cursor-pointer p-2 rounded-l bg-sky-200 hover:bg-sky-300 text-sky-800 inline select-none"
                                         >
                                             Update
                                         </div>
@@ -59,25 +83,37 @@ const ListExams = ({ exams, groups }) => {
                                             onClick={() => {
                                                 handleDeleteExam(exam.id);
                                             }}
-                                            className=" cursor-pointer p-2 bg-red-200 hover:bg-red-300 text-red-800 inline select-none"
+                                            className="h-fit cursor-pointer p-2 rounded-r bg-red-200 hover:bg-red-300 text-red-800 inline select-none"
                                         >
                                             Delete
                                         </div>
+
+                                        <MultipleSelect
+                                            allgroups={invitedGroups}
+                                            selectedGroups={exam.Groups}
+                                            exam = {exam}
+                                            className="h-4"
+                                            examsState = {examsState}
+                                            setExamsList = {setExamsList}
+                                        />
                                         <div
                                             onClick={() => {
+                                                setModelState({
+                                                    open : true,
+                                                    exame : exam
+                                                })
                                             }}
-                                            className=" cursor-pointer p-2 rounded-r bg-green-200 hover:bg-green-300 text-green-800 inline select-none"
+                                            className=" h-fit cursor-pointer p-2 rounded bg-green-200 hover:bg-green-300 text-green-800 inline select-none"
                                         >
                                             Affect
                                         </div>
-                                        <MultipleSelect className="h-4"/>
                                     </td>
                                 </tr>
                             );
                         })}
                     </tbody>
                 </table>
-                {/* <Modal/> */}
+                <MyModal modelState={modelState} setModelState={setModelState} />
             </div>
         </AuthLayoutTeacher>
     );
