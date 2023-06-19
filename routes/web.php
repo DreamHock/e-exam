@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('groups', GroupController::class);
         Route::resource('exams', ExamController::class)->names(['index' => 'list.exams']);
         Route::patch('/exams/{id}/updateState', [ExamController::class, 'updateState'])->name('update.state');
+        // Route::post("")
     });
 });
 

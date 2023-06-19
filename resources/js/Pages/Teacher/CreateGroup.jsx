@@ -3,7 +3,7 @@ import QuestionAnswers from "./components/QuestionAnswers";
 import { useEffect, useState } from "react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { router } from "@inertiajs/react";
-import Test from "@/Components/Test";
+import Test from "@/Components/Time";
 import GroupInformations from "./components/GroupInformations";
 import TransferList from "./components/TrasferList";
 import { Alert, Snackbar } from "@mui/material";
@@ -30,7 +30,7 @@ const CreateGroup = ({ students }) => {
     }, [studentNotOnGroup, studentOneGroup])
 
     const submitHandler = () => {
-        if(info.name.length>0){
+        if (info.name.length > 0) {
 
             var selectedStudents = studentOneGroup.map(Ele => Ele.id)
             console.log(selectedStudents);
@@ -38,8 +38,8 @@ const CreateGroup = ({ students }) => {
                 name: info.name,
                 selectedStudents: selectedStudents
             });
-        }else{
-            HandelSnakeBar(true,"please enter group name")
+        } else {
+            HandelSnakeBar(true, "please enter group name")
         }
     };
 
@@ -95,10 +95,10 @@ const CreateGroup = ({ students }) => {
                 </button>
             </div> */}
             {/* </form> */}
-            <Snackbar open={SnakeBar.open} autoHideDuration={6000} onClose={()=>{
+            <Snackbar open={SnakeBar.open} autoHideDuration={6000} onClose={() => {
                 setSnakeBar({ open: false, message: "", error: false })
             }}>
-                <Alert onClose={()=>setSnakeBar({ open: false, message: "", error: false })} severity={SnakeBar.error?"error":"success"} sx={{ width: '100%' }}>
+                <Alert onClose={() => setSnakeBar({ open: false, message: "", error: false })} severity={SnakeBar.error ? "error" : "success"} sx={{ width: '100%' }}>
                     {SnakeBar.message}
                 </Alert>
             </Snackbar>

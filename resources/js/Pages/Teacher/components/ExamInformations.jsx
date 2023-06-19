@@ -1,5 +1,5 @@
 import InputLabel from "@/Components/InputLabel";
-import Test from "@/Components/Test";
+import Test from "@/Components/Time";
 import TextInput from "@/Components/TextInput";
 import TimePicker from "@/Components/TimePicker";
 import React, { useEffect } from "react";

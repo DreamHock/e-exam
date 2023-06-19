@@ -9,12 +9,8 @@ class Exam extends Model
 {
     protected $fillable = [
         "name",
-        "date",
-        "start",
-        "end",
         "user_id",
-        "startTime",
-        "endTime"
+        
     ];
     use HasFactory;
 
